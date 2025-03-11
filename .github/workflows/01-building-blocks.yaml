@@ -1,7 +1,7 @@
 name: 01-Building-Blocks
 on:
-  - push
-  - workflow_dispatch
+  - push  #this workflow triggers whenever there is push event
+  - workflow_dispatch #manual trigger
 jobs:
   my-first-job:
     runs-on: ubuntu-latest
