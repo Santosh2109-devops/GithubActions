@@ -11,5 +11,6 @@ jobs:
   my-second-job:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello"
+      - name: Second Step
+        run: echo "Hello"
     
