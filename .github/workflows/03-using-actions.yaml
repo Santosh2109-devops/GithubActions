@@ -1,0 +1,33 @@
+name: 03-Using-Actions
+on:
+  push:
+    branches:
+      - master
+      - 'release/**'
+    paths-ignore:
+      - 'docs/**'
+  # pull_request:
+  #   types:
+  #     - opened #activity types
+  #     - synchronize
+  #   branches:
+  #     - master
+    # branches-ignore:
+    #   - 
+    # paths:
+    #   - 
+    # tags:
+    #   - 
+jobs:
+  Building-ReactJs-Application:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: Install Dependencies
+        run:  npm ci
+        working-directory: 04-Using-Custom-Actions/react-app
