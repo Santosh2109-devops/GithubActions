@@ -9,7 +9,7 @@ on:
         default: false
         description: Kindly provide the value
 env:
-  MY_WORKFLOW_NAME: ${{ var.MY_VAR || "Default Workflow Name"}}
+  MY_WORKFLOW_NAME: ${{ vars.MY_VAR || "Default Workflow Name"}}
 jobs:
   display-information:
     runs-on: ubuntu-latest
