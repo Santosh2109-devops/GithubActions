@@ -1,0 +1,32 @@
+name: matrices-sample
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  backwards-compatability:
+    name: ${{matrix.os}}-${{matrix.node-version}}
+    strategy:
+      fail-fast: true #whenever any jobs fails, all other jobs will be interrupted
+      matrix:
+        node-version: [16.x,17.x,18.x]
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - mac-latest
+        include:
+          - node-version: 16.x
+            os: ubuntu-latest
+          - node-version: 21.x
+            os: ubuntu-latest
+            tag: experimental
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Setup node version
+        uses: actions/setup-node
+        with: 
+          node-version: ${{matrix.node-version}}
+      - name: Perform some tests
+        run: echo "Running tests on ${{matrix.os}} and NodeJS ${{matrix.node-version}}"
+      - name: Fail if experimental
+        if: matrix.tag == 'experimental'
+        run: exit 1
